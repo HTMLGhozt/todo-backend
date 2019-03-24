@@ -2,7 +2,7 @@ const {
   getUsers,
   getUserById,
   postUser,
-  deleteUser
+  deleteUser,
 } = require('./controllers');
 
 module.exports = app => {

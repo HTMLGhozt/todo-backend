@@ -1,5 +1,4 @@
 const express = require('express');
-const loki = require('lokijs');
 
 const server = express();
 

@@ -6,9 +6,9 @@ const db = new loki('db.json', {
   throttledSaves: true,
 });
 
-const users = db.addCollection('User', {
+db.addCollection('User', {
   unique: ['username'],
-  exact: ['password']
+  exact: ['password'],
 });
 
 module.exports = { db };
