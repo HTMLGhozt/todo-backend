@@ -1,42 +1,44 @@
-const { db } = require('../db');
+const db = require('../db');
 
-function getUsers(req, res) {
-  const userList = db.getCollection('User').data;
+const collection = process.env.NODE_ENV === 'test' ? 'Todo-test' : 'Todo';
 
-  res.status(200).json(userList);
+function getTodos(_, res) {
+  const { data: todoList } = db.getCollection(collection);
+
+  res.status(200).json(todoList);
 }
 
-async function getUserById(req, res) {
+async function getTodoById(req, res) {
   const { id } = req.params;
   try {
-    const user = await db.getCollection('User').get(+id);
+    const todo = await db.getCollection(collection).get(+id);
 
-    res.status(200).json({ user });
+    res.status(200).json({ todo });
   } catch (error) {
-    res.status(422).json({ error: "couldn't get user" });
+    res.status(422).json({ error: "couldn't get todo" });
   }
 }
 
-async function postUser(req, res) {
-  const { username, password } = req.body;
+async function postTodo(req, res) {
+  const { text, completed } = req.body;
   try {
-    const newUser = db.getCollection('User').insert({ username, password });
+    const newTodo = db.getCollection(collection).insert({ text, completed });
 
     await db.saveDatabase();
 
     res.status(201).json({
       status: 'success',
-      userId: newUser.$loki,
+      todoId: newTodo.$loki,
     });
   } catch (error) {
-    res.status(500).json({ error: "couldn't save user" });
+    res.status(500).json({ error: "couldn't save todo" });
   }
 }
 
-async function deleteUser(req, res) {
+async function deleteTodo(req, res) {
   const { id } = req.params;
   try {
-    db.getCollection('User').findAndRemove({ $loki: +id });
+    db.getCollection(collection).findAndRemove({ $loki: +id });
 
     await db.saveDatabase();
 
@@ -45,13 +47,13 @@ async function deleteUser(req, res) {
       id,
     });
   } catch (error) {
-    res.status(500).json({ error: "couldn't delete user" });
+    res.status(500).json({ error: "couldn't delete todo" });
   }
 }
 
 module.exports = {
-  getUsers,
-  getUserById,
-  postUser,
-  deleteUser,
+  getTodos,
+  getTodoById,
+  postTodo,
+  deleteTodo,
 };

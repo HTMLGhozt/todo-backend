@@ -1,19 +1,19 @@
 const {
-  getUsers,
-  getUserById,
-  postUser,
-  deleteUser,
+  getTodos,
+  getTodoById,
+  postTodo,
+  deleteTodo,
 } = require('./controllers');
 
 module.exports = app => {
   app
-    .route('/api/users')
-    .get(getUsers)
-    .post(postUser);
+    .route('/api/todos')
+    .get(getTodos)
+    .post(postTodo);
 
   app
-    .route('/api/users/:id')
-    .get(getUserById)
-    // .put(updateUser)
-    .delete(deleteUser);
+    .route('/api/todos/:id')
+    .get(getTodoById)
+    // .put(updateTodo)
+    .delete(deleteTodo);
 };

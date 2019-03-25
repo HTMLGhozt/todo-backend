@@ -6,9 +6,11 @@ const db = new loki('db.json', {
   throttledSaves: true,
 });
 
-db.addCollection('User', {
-  unique: ['username'],
-  exact: ['password'],
-});
+if (process.env.NODE_ENV !== 'test') {
+  db.addCollection('Todo', {
+    unique: ['text'],
+    exact: ['completed'],
+  });
+}
 
-module.exports = { db };
+module.exports = db;
