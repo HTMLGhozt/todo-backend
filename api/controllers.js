@@ -13,6 +13,8 @@ async function getTodoById(req, res) {
   try {
     const todo = await db.getCollection(collection).get(+id);
 
+    if (!todo) throw new Error();
+
     res.status(200).json({ todo });
   } catch (error) {
     res.status(422).json({ error: "couldn't get todo" });
@@ -22,7 +24,11 @@ async function getTodoById(req, res) {
 async function postTodo(req, res) {
   const { text, completed } = req.body;
   try {
-    const newTodo = db.getCollection(collection).insert({ text, completed });
+    if (!text) throw new Error();
+    const newTodo = db.getCollection(collection).insert({
+      text,
+      completed: completed || false,
+    });
 
     await db.saveDatabase();
 
@@ -38,7 +44,7 @@ async function postTodo(req, res) {
 async function deleteTodo(req, res) {
   const { id } = req.params;
   try {
-    db.getCollection(collection).findAndRemove({ $loki: +id });
+    db.getCollection(collection).remove(+id);
 
     await db.saveDatabase();
 
@@ -47,7 +53,7 @@ async function deleteTodo(req, res) {
       id,
     });
   } catch (error) {
-    res.status(500).json({ error: "couldn't delete todo" });
+    res.status(404).json({ error: "couldn't delete todo" });
   }
 }
 

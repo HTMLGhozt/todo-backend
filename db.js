@@ -3,6 +3,7 @@ const loki = require('lokijs');
 const db = new loki('db.json', {
   autosave: true,
   autoload: true,
+  env: 'NODEJS',
   throttledSaves: true,
 });
 
