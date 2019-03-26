@@ -1,0 +1,89 @@
+{
+  "filename": "db/db.json",
+  "collections": [
+    {
+      "name": "Todo",
+      "data": [],
+      "idIndex": [],
+      "binaryIndices": {},
+      "constraints": null,
+      "uniqueNames": [
+        "text"
+      ],
+      "transforms": {},
+      "objType": "Todo",
+      "dirty": false,
+      "cachedIndex": null,
+      "cachedBinaryIndex": null,
+      "cachedData": null,
+      "adaptiveBinaryIndices": true,
+      "transactional": false,
+      "cloneObjects": true,
+      "cloneMethod": "parse-stringify",
+      "asyncListeners": true,
+      "disableMeta": false,
+      "disableChangesApi": true,
+      "disableDeltaChangesApi": true,
+      "autoupdate": false,
+      "serializableIndices": true,
+      "ttl": null,
+      "maxId": 0,
+      "DynamicViews": [],
+      "events": {
+        "insert": [],
+        "update": [],
+        "pre-insert": [],
+        "pre-update": [],
+        "close": [],
+        "flushbuffer": [],
+        "error": [],
+        "delete": [
+          null
+        ],
+        "warning": [
+          null
+        ]
+      },
+      "changes": [],
+      "console": {
+        "_buffer": [],
+        "_counters": {},
+        "_timers": {},
+        "_groupDepth": 0
+      }
+    }
+  ],
+  "databaseVersion": 1.5,
+  "engineVersion": 1.5,
+  "autosave": true,
+  "autosaveInterval": 5000,
+  "autosaveHandle": null,
+  "throttledSaves": true,
+  "options": {
+    "autosave": true,
+    "autoload": true,
+    "env": "NODEJS",
+    "throttledSaves": true,
+    "serializationMethod": "pretty",
+    "verbose": true,
+    "destructureDelimiter": "$<\n",
+    "recursiveWait": true,
+    "recursiveWaitLimit": false,
+    "recursiveWaitLimitDuration": 2000,
+    "started": 1553581381363
+  },
+  "persistenceMethod": "fs",
+  "persistenceAdapter": null,
+  "verbose": true,
+  "events": {
+    "init": [
+      null
+    ],
+    "loaded": [],
+    "flushChanges": [],
+    "close": [],
+    "changes": [],
+    "warning": []
+  },
+  "ENV": "NODEJS"
+}

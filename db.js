@@ -1,17 +1,21 @@
 const loki = require('lokijs');
 
-const db = new loki('db.json', {
+const isTestEnv = process.env.NODE_ENV === 'test';
+
+const db = new loki('db/db.json', {
   autosave: true,
   autoload: true,
   env: 'NODEJS',
   throttledSaves: true,
+  serializationMethod: isTestEnv ? 'pretty' : 'normal',
+  verbose: isTestEnv,
 });
 
-if (process.env.NODE_ENV !== 'test') {
-  db.addCollection('Todo', {
-    unique: ['text'],
-    exact: ['completed'],
-  });
-}
+db.addCollection('Todo', {
+  unique: ['text'],
+  exact: ['completed'],
+  clone: true,
+  asyncListeners: isTestEnv,
+});
 
 module.exports = db;

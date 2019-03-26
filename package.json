@@ -22,12 +22,13 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "start:dev": "nodemon server.js",
+    "start:dev": "nodemon server.js --ignore db/",
     "start": "node server.js",
     "test": "jest",
     "lint": "eslint ./",
     "prettier": "prettier \"**/*.+(js|jsx|json|yml|yaml|css|less|md|graphql|mdx)\"",
-    "format": "npm run prettier -- --write"
+    "format": "npm run prettier -- --write",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "husky": {
     "hooks": {

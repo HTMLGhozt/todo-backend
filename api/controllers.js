@@ -8,10 +8,10 @@ function getTodos(_, res) {
   res.status(200).json(todoList);
 }
 
-async function getTodoById(req, res) {
+function getTodoById(req, res) {
   const { id } = req.params;
   try {
-    const todo = await db.getCollection(collection).get(+id);
+    const todo = db.getCollection(collection).get(+id);
 
     if (!todo) throw new Error();
 
@@ -21,16 +21,17 @@ async function getTodoById(req, res) {
   }
 }
 
-async function postTodo(req, res) {
+function postTodo(req, res) {
   const { text, completed } = req.body;
   try {
-    if (!text) throw new Error();
-    const newTodo = db.getCollection(collection).insert({
-      text,
-      completed: completed || false,
-    });
+    if (!text) {
+      throw new Error();
+    }
+    const newTodo = db
+      .getCollection(collection)
+      .insert([{ text, completed: completed || false }]);
 
-    await db.saveDatabase();
+    db.saveDatabase();
 
     res.status(201).json({
       status: 'success',
@@ -41,12 +42,12 @@ async function postTodo(req, res) {
   }
 }
 
-async function deleteTodo(req, res) {
+function deleteTodo(req, res) {
   const { id } = req.params;
   try {
     db.getCollection(collection).remove(+id);
 
-    await db.saveDatabase();
+    db.saveDatabase();
 
     res.status(202).json({
       status: 'success',
