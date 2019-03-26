@@ -1,6 +1,6 @@
 const loki = require('lokijs');
 
-const isTestEnv = process.env.NODE_ENV === 'test';
+const { isTestEnv } = require('./env');
 
 const db = new loki('db/db.json', {
   autosave: true,

@@ -1,6 +1,5 @@
 const db = require('../db');
-
-const collection = process.env.NODE_ENV === 'test' ? 'Todo-test' : 'Todo';
+const { collection } = require('../env');
 
 function getTodos(_, res) {
   const { data: todoList } = db.getCollection(collection);

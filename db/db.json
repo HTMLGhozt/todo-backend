@@ -46,7 +46,6 @@
       },
       "changes": [],
       "console": {
-        "_buffer": [],
         "_counters": {},
         "_timers": {},
         "_groupDepth": 0
@@ -70,7 +69,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1553581381363
+    "started": 1553582867191
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
@@ -81,7 +80,9 @@
     ],
     "loaded": [],
     "flushChanges": [],
-    "close": [],
+    "close": [
+      null
+    ],
     "changes": [],
     "warning": []
   },
