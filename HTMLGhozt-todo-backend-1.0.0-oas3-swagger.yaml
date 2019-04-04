@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  description: Server for a simple offline todo list.
+  version: '1.0.0-oas3'
+  title: Todo-Backend
+  contact:
+    email: thomas.dillard.studios@gmail.com
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /api/todos:
+    get:
+      tags:
+        - developers
+      summary: returns the full list of todos
+      operationId: getTodo
+      description: |
+        returns the full list of todos.
+      responses:
+        '200':
+          description: fill list of todos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+        '500':
+          description: couldn't get todos
+    post:
+      tags:
+        - admins
+      summary: adds a new todo
+      operationId: addTodo
+      description: Adds an item to the system
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Todo'
+        description: Inventory item to add
+servers:
+  - url: 'https://virtserver.swaggerhub.com/HTMLGhozt/todo-backend/1.0.0'
+components:
+  schemas:
+    Todo:
+      type: object
+      required:
+        - text
+      properties:
+        id:
+          type: string
+          format: incrementing number
+          example: 1
+        text:
+          type: string
+          example: Wash dishes
+        complete:
+          type: boolean
+          description: If the todo has been completed.
+          default: false
+    Manufacturer:
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: ACME Corporation
+        homePage:
+          type: string
+          format: url
+          example: 'https://www.acme-corp.com'
+        phone:
+          type: string
+          example: 408-867-5309
