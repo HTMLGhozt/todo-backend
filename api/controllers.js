@@ -16,6 +16,7 @@ function getTodoById(req, res) {
 
     res.status(200).json({ todo });
   } catch (error) {
+    console.warn(error.message);
     res.status(422).json({ error: "couldn't get todo" });
   }
 }
@@ -37,6 +38,7 @@ function postTodo(req, res) {
       todoId: newTodo.$loki,
     });
   } catch (error) {
+    console.warn(error.message);
     res.status(500).json({ error: "couldn't save todo" });
   }
 }
@@ -53,6 +55,7 @@ function deleteTodo(req, res) {
       id,
     });
   } catch (error) {
+    console.warn(error.message);
     res.status(404).json({ error: "couldn't delete todo" });
   }
 }

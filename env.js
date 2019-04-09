@@ -1,3 +1,4 @@
+// TODO: correctly configure a proper environment with dotenv
 const { NODE_ENV, PORT } = process.env;
 
 const isTestEnv = NODE_ENV === 'test';
