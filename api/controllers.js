@@ -43,6 +43,23 @@ function postTodo(req, res) {
   }
 }
 
+function updateTodo(req, res) {
+  const { id } = req.params;
+  const { text, completed } = req.body;
+  try {
+    const Todos = db.getCollection(collection);
+    const todo = Todos.get(id);
+    const newTodo = Todos.update({ ...todo, text, completed });
+
+    db.saveDatabase();
+
+    res.status(200).json({ success: 'success', data: newTodo });
+  } catch (error) {
+    console.warn(error.message);
+    res.status(500).json({ error: "Couldn't update" });
+  }
+}
+
 function deleteTodo(req, res) {
   const { id } = req.params;
   try {
@@ -63,6 +80,7 @@ function deleteTodo(req, res) {
 module.exports = {
   getTodos,
   getTodoById,
+  updateTodo,
   postTodo,
   deleteTodo,
 };

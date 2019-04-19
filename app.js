@@ -1,13 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 
-const { isTestEnv } = require('./env.js');
+// const { isTestEnv } = require('./env.js');
 
 const server = express();
 
 // TODO: correctly configure CORS
 const corsOptions = {
-  origin: isTestEnv ? '*' : null,
+  origin: '*',
+  // origin: isTestEnv ? '*' : null,
 };
 
 server.use(cors(corsOptions));

@@ -1,6 +1,7 @@
 const {
   getTodos,
   getTodoById,
+  updateTodo,
   postTodo,
   deleteTodo,
 } = require('./controllers');
@@ -14,6 +15,6 @@ module.exports = app => {
   app
     .route('/api/todos/:id')
     .get(getTodoById)
-    // .put(updateTodo)
+    .put(updateTodo)
     .delete(deleteTodo);
 };
